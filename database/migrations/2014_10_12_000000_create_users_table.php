@@ -21,8 +21,10 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->foreignId('rol_id')->constrained('roles')->onDelete('cascade')->default(1);
+            //$table->foreignId('rol_id')->constrained('roles')->onDelete('cascade')->default(1);
             $table->integer('two_factor_code')->nullable();
+            $table->timestamp('two_factor_expires_at')->nullable();
+            $table->boolean('two_factor_verified')->default(0);
         });
     }
 

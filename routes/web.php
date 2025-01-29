@@ -25,25 +25,27 @@ Route::get('/', function () {
 //    return view('dashboard');
 //})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth', 'guest')->group(function () {
     // Rutas para el segundo factor de autentificacion
     Route::get('/two-factor', [TwoFactorAuthController::class, 'index'])->name('two-factor.index');
     Route::post('/two-factor', [TwoFactorAuthController::class, 'verify'])->name('two-factor.verify');
+    Route::post('/resend-code', [TwoFactorAuthController::class, 'resend'])->name('two-factor.resend');
 });
 
 
-Route::middleware('auth', 'twofactorauth')->group(function () {
+Route::middleware('auth', 'two_factor_verified')->group(function () {
     // Puede acceder a estas rutas una vez pasado los 2 factores de autentificacion
 
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
 
+
     //Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     //Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     //Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/products', [ProductController::class, 'showProducts'])->name('products.index');
+    //Route::get('/products', [ProductController::class, 'showProducts'])->name('products.index');
 });
 
 

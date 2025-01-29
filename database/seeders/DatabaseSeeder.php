@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
     {
 
         // Insertar roles
+        /*
         DB::table('roles')->insert([
             ['id' => 1, 'rol' => 'Usuario'],
             ['id' => 2, 'rol' => 'Otorgador'],
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
             ['id' => 4, 'rol' => 'Manejador'],
             ['id' => 5, 'rol' => 'Emisor de Super Usuarios']
         ]);
+        */
 
         // Insertar usuarios
         DB::table('users')->insert([
@@ -32,39 +34,45 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Jorge Usuario',
                 'email' => 'jorgefullscout@gmail.com',
                 'password' => '$2y$10$ctg7H.cxx7ulKg3/0aLzo.3quQ74b5HJjme23mAaBSZ0kq49/NXPW',
-                'rol_id' => 1
+                //'rol_id' => 1
+                'two_factor_verified' => 0,
             ],
             [
                 'id' => 2,
                 'name' => 'Jorge Otorgador',
                 'email' => 'jorgefullscout2.0@gmail.com',
                 'password' => '$2y$10$ctg7H.cxx7ulKg3/0aLzo.3quQ74b5HJjme23mAaBSZ0kq49/NXPW',
-                'rol_id' => 2
+                //'rol_id' => 2
+                'two_factor_verified' => 0,
             ],
             [
                 'id' => 3,
                 'name' => 'Jorge Revocador',
                 'email' => 'jorgefullscout3.0@gmail.com',
                 'password' => '$2y$10$ctg7H.cxx7ulKg3/0aLzo.3quQ74b5HJjme23mAaBSZ0kq49/NXPW',
-                'rol_id' => 3
+                //'rol_id' => 3
+                'two_factor_verified' => 0,
             ],
             [
                 'id' => 4,
                 'name' => 'Jorge Manejador',
                 'email' => 'jorgefullscout4.0@gmail.com',
                 'password' => '$2y$10$ctg7H.cxx7ulKg3/0aLzo.3quQ74b5HJjme23mAaBSZ0kq49/NXPW',
-                'rol_id' => 4
+                //'rol_id' => 4
+                'two_factor_verified' => 0,
             ],
             [
                 'id' => 5,
                 'name' => 'Jorge Emisor de Super Usuarios',
                 'email' => 'jorge.luna@tecnomty.com',
                 'password' => '$2y$10$ctg7H.cxx7ulKg3/0aLzo.3quQ74b5HJjme23mAaBSZ0kq49/NXPW',
-                'rol_id' => 5
+                //'rol_id' => 5
+                'two_factor_verified' => 0,
             ]
         ]);
 
         // Inserta permisos
+        /*
         DB::table('permissions')->insert([
             ['id' => 1, 'permiso' => 'Create'],
             ['id' => 2, 'permiso' => 'Read'],
@@ -87,5 +95,6 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Teclado Mecánico', 'description' => 'Teclado mecánico con retroiluminación RGB', 'price' => 120.00],
             ['name' => 'Silla Ergonómica', 'description' => 'Silla de oficina ergonómica con soporte lumbar', 'price' => 300.00],
         ]);
+        */
     }
 }
