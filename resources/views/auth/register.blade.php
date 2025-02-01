@@ -39,7 +39,18 @@
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
+        {{--
         <x-recaptcha/>
+        --}}
+
+    <!-- Widget de reCAPTCHA -->
+    <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.site_key') }}"></div>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <!-- Mensaje de error (opcional) -->
+    @if ($errors->has('g-recaptcha-response'))
+        <span class="text-danger">{{ $errors->first('g-recaptcha-response') }}</span>
+    @endif
+
 
         <div class="flex items-center justify-end mt-4">
             <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
@@ -51,4 +62,19 @@
             </x-primary-button>
         </div>
     </form>
+
+
+<script>
+function onSubmit(token) {
+  // The token is available here.
+  // Submit the form using the token.
+  document.getElementById("register-form").submit(); // Replace "myForm" with your form's ID
+}
+
+function onError(error) {
+  // Handle error.
+  alert("reCAPTCHA error: " + error);
+}
+</script>
+
 </x-guest-layout>

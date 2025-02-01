@@ -43,5 +43,18 @@
                 {{ __('Log in') }}
             </x-primary-button>
         </div>
+
+            <!-- Widget de reCAPTCHA -->
+    <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.site_key') }}"></div>
+
+<!-- Mensaje de error (opcional) -->
+@if ($errors->has('g-recaptcha-response'))
+    <span class="text-danger">{{ $errors->first('g-recaptcha-response') }}</span>
+@endif
+
+
     </form>
+
+        <!-- Script de reCAPTCHA -->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </x-guest-layout>
