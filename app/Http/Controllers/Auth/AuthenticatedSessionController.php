@@ -35,30 +35,24 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request): RedirectResponse
     {
 
-        $validate = Validator::make($request->all(), [
-            'g-recaptcha-response' => 'required|captcha'
+        // Verificar reCAPTCHA
+        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+            'secret' => config('services.recaptcha.secret_key'),
+            'response' => $request->input('g-recaptcha-response'),
+            'remoteip' => $request->ip(),
         ]);
-
-    // Verificar reCAPTCHA
-    $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-        'secret' => config('services.recaptcha.secret_key'),
-'response' => $request->input('g-recaptcha-response'),
-        'remoteip' => $request->ip(),
-    ]);
 
         $responseData = $response->json();
 
         if (!$responseData['success']) {
             return redirect()->back()->withErrors(['g-recaptcha-response' => 'Por favor, verifica que no eres un robot.']);
         }
+        //$request->authenticate();
+        //$request->session()->regenerate();
+        $this->twoFactorService->generateAndSendCode($request->email);
+        return redirect()->route('two-factor.message');
 
-        $request->authenticate();
-
-        $request->session()->regenerate();
-
-        $this->twoFactorService->generateAndSendCode();
-
-        return redirect()->intended(RouteServiceProvider::AB);
+        //return redirect()->intended(RouteServiceProvider::TF);
     }
 
     /**

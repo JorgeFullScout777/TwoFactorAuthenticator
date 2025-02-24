@@ -25,15 +25,19 @@ Route::get('/', function () {
 //    return view('dashboard');
 //})->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/two-factor.index', [TwoFactorAuthController::class, 'index'])->name('two-factor.index')->middleware('signed');
+Route::get('/two-factor', function () {
+    return view('auth.two-factor-message');
+})->name('two-factor.message');
+Route::post('/resend-code', [TwoFactorAuthController::class, 'resend'])->name('two-factor.resend');
+Route::post('/two-factor', [TwoFactorAuthController::class, 'verify'])->name('two-factor.verify');
+
 Route::middleware('auth', 'guest')->group(function () {
     // Rutas para el segundo factor de autentificacion
-    Route::get('/two-factor', [TwoFactorAuthController::class, 'index'])->name('two-factor.index');
-    Route::post('/two-factor', [TwoFactorAuthController::class, 'verify'])->name('two-factor.verify');
-    Route::post('/resend-code', [TwoFactorAuthController::class, 'resend'])->name('two-factor.resend');
+    //
+    //Route::get('/two-factor', [TwoFactorAuthController::class, 'index'])->name('two-factor.index');
 });
-
-
-Route::middleware('auth', 'two_factor_verified')->group(function () {
+Route::middleware('auth')->group(function () {
     // Puede acceder a estas rutas una vez pasado los 2 factores de autentificacion
 
     Route::get('/dashboard', function () {

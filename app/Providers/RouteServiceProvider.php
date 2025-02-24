@@ -19,7 +19,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const HOME = '/dashboard';
     public const INDEX = '/';
-    public const AB = '/two-factor';
+    public const TF = '/two-factor';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.

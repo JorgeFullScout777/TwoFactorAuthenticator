@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Providers\TwoFactorService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -63,13 +64,16 @@ class TwoFactorAuthController extends Controller
         'code' => 'required|integer',
         ]);
         // Trae al usuario de la bd
-        $user = auth()->user();
+        $user = User::where('two_factor_code', $request->code)->first();
         // Valida que el codigo recibido sea el mismo de la bd
-        if ($user->two_factor_code == $request->code && now()->lt($user->two_factor_expires_at)) {
+        //if ($user->two_factor_code == $request->code && now()->lt($user->two_factor_expires_at)) {
+        if ($user) {
             $user->two_factor_code = null;
             $user->two_factor_verified = true;
             $user->two_factor_expires_at = null;
             $user->save();
+
+            auth()->login($user);
     
             return redirect()->intended('/dashboard');
         }

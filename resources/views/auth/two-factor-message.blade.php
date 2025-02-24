@@ -1,15 +1,10 @@
 <x-guest-layout>
     @vite(['resources/css/app.css', 'resources/css/custom-styles.css'])
-    <form action="{{ route('two-factor.verify') }}" method="POST">
-        @csrf
-        <label for="code">Two-Factor Code</label>
-        <input type="number" class="text-field" name="code" id="code" required>
-        <button class="save-button" type="submit">Verify</button>
-    </form>
-    {{--<button id="resend-code" class="edit-button" type="button">Reenviar Codigo</button>
-    <span id="countdown"></span>--}}
+    <label for="">Tu codigo se ha enviado, revisa tu correo</label>
+    <button id="resend-code" class="edit-button" type="button">Reenviar Codigo</button>
+    <span id="countdown"></span>
 
-
+    {{--
     @if ($errors->any())
         <div>
         @foreach ($errors->all() as $error)
@@ -17,8 +12,9 @@
         @endforeach
         </div>
     @endif
+    --}}
 
-    {{--<script>
+    <script>
         function enableButton() {
             const button = document.getElementById('resend-code');
             button.disabled = false;
@@ -67,5 +63,5 @@
 
             disableButton(); // Deshabilitar el botón al hacer clic
         });
-    </script>--}}
+    </script>
 </x-guest-layout>
