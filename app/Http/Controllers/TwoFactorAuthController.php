@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Providers\TwoFactorService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 
 class TwoFactorAuthController extends Controller
@@ -59,6 +60,18 @@ class TwoFactorAuthController extends Controller
     
     public function verify(Request $request)
     {
+        // Verificar reCAPTCHA
+        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+            'secret' => config('services.recaptcha.secret_key'),
+            'response' => $request->input('g-recaptcha-response'),
+            'remoteip' => $request->ip(),
+        ]);
+
+        $responseData = $response->json();
+
+        if (!$responseData['success']) {
+            return redirect()->back()->withErrors(['g-recaptcha-response' => 'Por favor, verifica que no eres un robot.']);
+        }
         // Valida que el codigo sea recibido y que sea numero entero
         $request->validate([
         'code' => 'required|integer',
@@ -78,7 +91,9 @@ class TwoFactorAuthController extends Controller
             return redirect()->intended('/dashboard');
         }
         // Retorna a la pantalla de segundo factor de autentificacion en caso de que el codigo ingresado sea incorrecto
-        return redirect()->route('two-factor.index')->withErrors(['code' => 'El codigo ingresado es invalido.']);
+        //return redirect()->route('two-factor.index')->withErrors(['code' => 'El codigo ingresado es invalido.']);
+        return redirect()->back()->withErrors(['code' => 'El codigo ingresado no es invalido.']);
+
     }
     
     /*

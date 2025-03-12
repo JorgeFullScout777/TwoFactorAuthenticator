@@ -1,9 +1,9 @@
 <x-guest-layout>
     @vite(['resources/css/app.css', 'resources/css/custom-styles.css'])
     <label for="">Tu codigo se ha enviado, revisa tu correo</label>
-    <button id="resend-code" class="edit-button" type="button">Reenviar Codigo</button>
-    <span id="countdown"></span>
-
+    {{-- <button id="resend-code" class="edit-button" type="button">Reenviar Codigo</button>
+    <span id="countdown"></span>  --}}
+    
     {{--
     @if ($errors->any())
         <div>

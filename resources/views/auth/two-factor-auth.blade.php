@@ -5,10 +5,19 @@
         <label for="code">Two-Factor Code</label>
         <input type="number" class="text-field" name="code" id="code" required>
         <button class="save-button" type="submit">Verify</button>
-    </form>
-    {{--<button id="resend-code" class="edit-button" type="button">Reenviar Codigo</button>
-    <span id="countdown"></span>--}}
+                    <!-- Widget de reCAPTCHA -->
+    <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.site_key') }}"></div>
 
+    <!-- Mensaje de error (opcional) -->
+    {{--  @if ($errors->has('g-recaptcha-response'))
+        <span class="text-danger">{{ $errors->first('g-recaptcha-response') }}</span>
+    @endif--}}    
+</form>
+{{--<button id="resend-code" class="edit-button" type="button">Reenviar Codigo</button>
+<span id="countdown"></span>--}}
+
+<!-- Script de reCAPTCHA -->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
     @if ($errors->any())
         <div>
