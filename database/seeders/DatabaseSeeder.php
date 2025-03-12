@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -33,7 +34,7 @@ class DatabaseSeeder extends Seeder
                 'id' => 1,
                 'name' => 'Jorge Usuario',
                 'email' => 'jorgefullscout@gmail.com',
-                'password' => '$2y$10$ctg7H.cxx7ulKg3/0aLzo.3quQ74b5HJjme23mAaBSZ0kq49/NXPW',
+                'password' => Hash::make('12345678'),
                 //'rol_id' => 1
                 'two_factor_verified' => 0,
             ],
@@ -41,7 +42,7 @@ class DatabaseSeeder extends Seeder
                 'id' => 2,
                 'name' => 'Jorge Otorgador',
                 'email' => 'jorgefullscout2.0@gmail.com',
-                'password' => '$2y$10$ctg7H.cxx7ulKg3/0aLzo.3quQ74b5HJjme23mAaBSZ0kq49/NXPW',
+                'password' => Hash::make('12345678'),
                 //'rol_id' => 2
                 'two_factor_verified' => 0,
             ],
@@ -49,7 +50,7 @@ class DatabaseSeeder extends Seeder
                 'id' => 3,
                 'name' => 'Jorge Revocador',
                 'email' => 'jorgefullscout3.0@gmail.com',
-                'password' => '$2y$10$ctg7H.cxx7ulKg3/0aLzo.3quQ74b5HJjme23mAaBSZ0kq49/NXPW',
+                'password' => Hash::make('12345678'),
                 //'rol_id' => 3
                 'two_factor_verified' => 0,
             ],
@@ -57,7 +58,7 @@ class DatabaseSeeder extends Seeder
                 'id' => 4,
                 'name' => 'Jorge Manejador',
                 'email' => 'jorgefullscout4.0@gmail.com',
-                'password' => '$2y$10$ctg7H.cxx7ulKg3/0aLzo.3quQ74b5HJjme23mAaBSZ0kq49/NXPW',
+                'password' => Hash::make('12345678'),
                 //'rol_id' => 4
                 'two_factor_verified' => 0,
             ],
@@ -65,7 +66,7 @@ class DatabaseSeeder extends Seeder
                 'id' => 5,
                 'name' => 'Jorge Emisor de Super Usuarios',
                 'email' => 'jorge.luna@tecnomty.com',
-                'password' => '$2y$10$ctg7H.cxx7ulKg3/0aLzo.3quQ74b5HJjme23mAaBSZ0kq49/NXPW',
+                'password' => Hash::make('12345678'),
                 //'rol_id' => 5
                 'two_factor_verified' => 0,
             ]

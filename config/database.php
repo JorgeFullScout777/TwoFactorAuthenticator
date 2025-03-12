@@ -59,8 +59,8 @@ return [
             'strict' => true,
             'engine' => null,
             'options'   => [
-                PDO::MYSQL_ATTR_SSL_KEY    => env('DB_SSL_KEY_PATH'),
-                PDO::MYSQL_ATTR_SSL_CERT   => env('DB_SSL_CERT_PATH'),
+                //PDO::MYSQL_ATTR_SSL_KEY    => env('DB_SSL_KEY_PATH'),
+                //PDO::MYSQL_ATTR_SSL_CERT   => env('DB_SSL_CERT_PATH'),
                 PDO::MYSQL_ATTR_SSL_CA     => env('DB_SSL_CA_PATH'),
                 PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false,  // Deshabilita la verificación del certificado del servidor
             ],
