@@ -57,11 +57,25 @@ class RegisteredUserController extends Controller
             return redirect()->back()->withErrors(['g-recaptcha-response' => 'Por favor, verifica que no eres un robot.']);
         }
 
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'password' => [
+                'required', 
+                'confirmed', 
+                Rules\Password::defaults()
+                    ->min(12) // Longitud mínima de 12 caracteres
+                    ->letters() // Debe contener al menos una letra
+                    ->mixedCase() // Debe contener al menos una mayúscula y una minúscula
+                    ->numbers() // Debe contener al menos un número
+                    ->symbols() // Debe contener al menos un carácter especial
+            ],
+        ]);
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            //'rol_id' => 1,
         ]);
 
         event(new Registered($user));
